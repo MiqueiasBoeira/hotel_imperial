@@ -1,0 +1,28 @@
+<!-- Supondo que este seja o seu arquivo base.html que você inclui em todas as suas páginas -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Hotel Imperial{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <div class="nav-bar">
+        <ul class="navigation-menu">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'financial_report' %}">Relatório Financeiro</a></li>
+            <li><a href="{% url 'all_stays' %}">Todas as Hospedagens</a></li>
+            <!-- O link para os detalhes das hospedagens geralmente seria dinâmico com base no ID da hospedagem -->
+        </ul>
+    </div>
+
+    {% block content %}
+    <!-- O conteúdo específico de cada página virá aqui -->
+    {% endblock %}
+
+    <footer>
+        <!-- Seu rodapé aqui -->
+    </footer>
+</body>
+</html>

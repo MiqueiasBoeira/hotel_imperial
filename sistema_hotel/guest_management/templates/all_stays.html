@@ -1,0 +1,51 @@
+<!-- Corrigido all_stays.html -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Todas as Hospedagens</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_stays.css' %}">
+
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        {% load static %}
+        <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
+    </header>
+
+    <main class="main-content">
+        <h1>Todas as Hospedagens</h1>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Ações</th>
+            </tr>
+            {% for stay in stays %}
+            <tr>
+                <td>{{ stay.booking.full_name }}</td>
+                <td>{{ stay.booking.cpf }}</td>
+                <td>{{ stay.booking.check_in }}</td>
+                <td>
+                    {% if stay.checkout %}
+                    {{ stay.checkout.check_out }}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'stay_details' stay.booking.id %}">Expandir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+
+</div>
+</body>
+</html>

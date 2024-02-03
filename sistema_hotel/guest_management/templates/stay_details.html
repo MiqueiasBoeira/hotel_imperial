@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Hospedagem</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stay_details.css' %}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        {% load static %}
+        <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
+    </header>
+<main class="main-content">
+    <h1>Detalhes da Hospedagem</h1>
+
+    <h2>Dados do Check-In</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <td>{{ booking.full_name }}</td>
+        </tr>
+        <tr>
+            <th>CPF</th>
+            <td>{{ booking.cpf }}</td>
+        </tr>
+        <!-- Repita o padrão para os demais campos -->
+        <tr>
+            <th>E-mail</th>
+            <td>{{ booking.email }}</td>
+        </tr>
+        <tr>
+            <th>Telefone</th>
+            <td>{{ booking.phone_number }}</td>
+        </tr>
+        <tr>
+            <th>Endereço</th>
+            <td>{{ booking.address }}</td>
+        </tr>
+        <tr>
+            <th>Motivo da Viagem</th>
+            <td>{{ booking.travel_reason }}</td>
+        </tr>
+        <tr>
+            <th>Diária</th>
+            <td>R$ {{ booking.daily_rate }}</td>
+        </tr>
+        <tr>
+            <th>Quantidade de Dias</th>
+            <td>{{ booking.number_of_days }}</td>
+        </tr>
+        <tr>
+            <th>Data de Check-In</th>
+            <td>{{ booking.check_in }}</td>
+        </tr>
+        <tr>
+            <th>Data de Check-Out</th>
+            <td>{{ booking.check_out }}</td>
+        </tr>
+        <tr>
+            <th>Acompanhantes</th>
+            <td>{{ booking.companions }}</td>
+        </tr>
+    </table>
+
+    <h2>Dados do Check-Out</h2>
+    {% if checkout %}
+    <table>
+        <tr>
+            <th>Consumo no Quarto</th>
+            <td>{{ checkout.room_consumption }}</td>
+        </tr>
+        <tr>
+            <th>Observações</th>
+            <td>{{ checkout.observations }}</td>
+        </tr>
+        <tr>
+            <th>Forma de Pagamento</th>
+            <td>{{ checkout.payment_method }}</td>
+        </tr>
+        <tr>
+            <th>Total Pago</th>
+            <td>R$ {{ checkout.total_paid }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <p>Informações de check-out não disponíveis</p>
+    {% endif %}
+</main>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!-- dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Imperial</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+
+{% load static %}
+<script type="text/javascript" src="{% static 'js/dashboard.js' %}"> </script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <header class="header">
+    {% load static %}
+    <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
+  </header>
+
+  <main class="main-content">
+    <nav class="nav">
+      <!-- Botões se necessário -->
+    </nav>
+
+
+    <div id="checkInFormSection" style="display:none">
+      <form action="" method="post">
+      {% csrf_token %}
+        <p>Nome completo: {{ form.full_name }}</p>
+        <p>CPF: {{ form.cpf }}</p>
+        <p>E-mail: {{ form.email }}</p>
+        <p>Telefone: {{form.phone_number}}</p>
+        <p>Endereço: {{ form.address }}</p>
+        <p>Acompanhantes: {{ form.companions }}</p>
+        <p>Motivo da viagem: {{ form.travel_reason }}</p>
+        <p>Diária: {{ form.daily_rate }}</p>
+        <p>Quantidade de diárias: {{form.number_of_days}}</p>
+        <p>Check-In {{form.check_in}}</p>
+        <p>Check-Out {{form.check_out}}</p>
+      <button type="button" id="cancelButtonForm" onclick="closeCheckInForm()">Cancelar</button>
+      <input type="submit" value="Enviar">
+      </form>
+    </div>
+
+      <div id="OccupiedRoomOptions" style="display:none">
+          <button type="button" id="expandButton" onclick="expandRoomData()" >Expandir dados</button>
+
+          <button type="button" id="cancelButtonDetailsSection" onclick="closeOccupiedRoomOptions()">Cancelar</button>
+
+      </div>
+
+
+
+
+
+    <div class="room-cards">
+    {% for room in rooms %}
+        <div class="room-card {% if room.is_occupied %}occupied{% else %}available{% endif %}"
+             data-room-number="{{ room.room_number }}"
+             onclick="{% if room.is_occupied %}showOccupiedRoomOptions('{{ room.room_number }}'){% else %}showCheckInForm('{{ room.room_number }}'){% endif %}">
+
+            <h2 class="room-title">{{ room.room_number }}</h2>
+            {% if room.is_occupied %}
+                <p class="room-date">{{ room.current_booking.check_in|date:"d/m/Y H:i" }} | {{ room.current_booking.check_out|date:"d/m/Y H:i" }}</p>
+                <!-- <p class="room-date">Check-Out: {{ room.current_booking.check_out|date:"d/m/Y H:i" }}</p> -->
+                <p class="room-name">{{ room.current_booking.full_name }}</p>
+            {% else %}
+                <!-- Outros detalhes do quarto -->
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+
+
+
+
+  </main>
+
+
+</div>
+
+
+
+
+
+
+</body>
+
+
+</html>
