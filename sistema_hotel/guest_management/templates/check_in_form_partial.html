@@ -1,5 +1,0 @@
-<form id="formCheckIn" method="post" action="{% url 'check_in' room.number %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Check-in</button>
-</form>

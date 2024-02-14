@@ -6,6 +6,7 @@
     <title>{% block title %}Hotel Imperial{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block extra_head %} {% endblock extra_head%}
 </head>
 <body>
     <div class="nav-bar">
@@ -17,6 +18,9 @@
         </ul>
     </div>
 
+    <header class="header">
+            <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
+        </header>
     {% block content %}
     <!-- O conteúdo específico de cada página virá aqui -->
     {% endblock %}

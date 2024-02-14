@@ -1,71 +1,66 @@
 <!-- room_details.html -->
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Imperial</title>
+{% extends 'base.html' %}
+
 {% load static %}
+
+{% block title %}
+Hotel Imperial - Dashboard
+{% endblock %}
+
+{% block extra_head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/room_details.css' %}">
-
-{% load static %}
-<script type="text/javascript" src="{% static 'js/room_details.js' %}"> </script>
-
-</head>
-
-<body>
-    <div class="container">
-
-        <header class="header">
-            {% load static %}
-            <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
-        </header>
-
-        <main class="main-content">
-
-            <div>
-                <h1>Detalhes do Hóspede do Quarto {{ booking.room.room_number }}</h1>
-                <p>Nome completo: {{ booking.full_name }}</p>
-                <p>CPF: {{ booking.cpf }}</p>
-                <p>E-mail: {{ booking.email }}</p>
-                <p>Telefone: {{booking.phone_number}}</p>
-                <p>Endereço: {{ booking.address }}</p>
-                <p>Acompanhantes: {{ booking.companions }}</p>
-                <p>Motivo da viagem: {{ booking.travel_reason }}</p>
-                <p>Diária: {{ booking.daily_rate }}</p>
-                <p>Quantidade de diárias: {{booking.number_of_days}}</p>
-                <p>Check-In {{booking.check_in}}</p>
-                <p>Check-Out {{booking.check_out}}</p>
-
-                <nav>
-                    <button type="button" id="closeService" onclick="showCheckOutForm()">Encerrar atendimento</button>
-                </nav>
+<script type="text/javascript" src="{% static 'js/room_details.js' %}"></script>
+{% endblock %}
 
 
-                    <div id="checkOutFormSection" style="display:none">
-                      <form action="{% url 'checkout' booking.room.room_number %}" method="post">
-                      {% csrf_token %}
-                          <p>Consumo no quarto: {{ form.room_consumption }}</p>
-                          <p>Observações: {{ form.observations }}</p>
-                          <p>Forma de pagamento: {{ form.payment_method }}</p>
-                          <p>Valor total: {{ form.total_paid }}</p>
-                      <button type="button" id="cancelButtonForm" onclick="closeCheckOutForm()">Cancelar</button>
-                      <input type="submit" value="Concluir Checkout">
-                      </form>
-                    </div>
+{% block content %}
 
 
+<div class="container">
+
+    <main class="main-content">
+
+        <div>
+            <h1>Detalhes do Hóspede do Quarto {{ booking.room.room_number }}</h1>
+            <p>Nome completo: {{ booking.full_name }}</p>
+            <p>CPF: {{ booking.cpf }}</p>
+            <p>E-mail: {{ booking.email }}</p>
+            <p>Telefone: {{booking.phone_number}}</p>
+            <p>Endereço: {{ booking.address }}</p>
+            <p>Acompanhantes: {{ booking.companions }}</p>
+            <p>Motivo da viagem: {{ booking.travel_reason }}</p>
+            <p>Diária: {{ booking.daily_rate }}</p>
+            <p>Quantidade de diárias: {{booking.number_of_days}}</p>
+            <p>Check-In {{booking.check_in}}</p>
+            <p>Check-Out {{booking.check_out}}</p>
+
+            <nav>
+                <button type="button" id="closeService" onclick="showCheckOutForm()">Encerrar atendimento</button>
+            </nav>
+
+
+            <div id="checkOutFormSection" style="display:none">
+                <form action="{% url 'checkout' booking.room.room_number %}" method="post">
+                    {% csrf_token %}
+                    <p>Consumo no quarto: {{ form.room_consumption }}</p>
+                    <p>Observações: {{ form.observations }}</p>
+                    <p>Forma de pagamento: {{ form.payment_method }}</p>
+                    <p>Valor total: {{ form.total_paid }}</p>
+                    <button type="button" id="cancelButtonForm" onclick="closeCheckOutForm()">Cancelar</button>
+                    <input type="submit" value="Concluir Checkout">
+                </form>
             </div>
 
 
-
-        </main>
-
-    </div>
+        </div>
 
 
+    </main>
 
-</body>
-</html>
+</div>
+
+{% endblock %}
+
+
 
 
