@@ -1,3 +1,155 @@
+body, html {
+  margin: 0;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  background: #FAFAFA;
+}
+
+.container {
+  width: calc(100% - 40px);
+  max-width: 1440px;
+  margin: 25px auto;
+  padding: 20px;
+  background: linear-gradient(180deg, #332F24 0%, #82785B 16.5%);
+  border-radius: 27px;
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 109px;
+  margin-bottom: 20px;
+}
+
+
+
+
+.main-content {
+  background: #FCF9EF;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 6px 6px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* Centraliza os itens se eles não ocuparem toda a largura */
+  flex-wrap: wrap; /* Permite que os itens sejam embrulhados para a linha seguinte */
+}
+
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.button {
+  background-color: #BAA06A;
+  border: none;
+  padding: 20px 30px;
+  margin: 0 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  font-weight:bold;
+
+}
+
+.room-cards {
+  padding-top: 20px;
+  border-top: 2px solid #ccc;
+  margin-top: 55px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Agora os cartões vão se ajustar para a próxima linha quando não couberem */
+  justify-content: center; /* Alinha os itens ao início do contêiner */
+  gap: 20px; /* Espaçamento entre os cartões */
+  width: 100%; /* Ocupa a largura total do contêiner .main-content */
+ }
+
+.room-card {
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 8px; /* Cantos arredondados */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+
+
+  transition: transform 0.2s, box-shadow 0.2s; /* Transição suave */
+}
+
+.room-card:hover {
+  transform: translateY(-5px); /* Eleva o cartão ligeiramente */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada no hover */
+}
+
+.room-card.available {
+   background: linear-gradient(
+    120deg,
+    rgba(201, 180, 88, 1) 0%,
+    rgba(145, 120, 59, 1) 100%
+  );
+
+  display:flex;
+}
+
+.room-card.occupied{
+    background: #747474;
+}
+
+
+
+.room-title {
+  font-size: 2em; /* Tamanho maior para o título */
+  font-weight: bold;
+  margin-bottom: 0.5em; /* Espaço antes do nome */
+  font-family: 'Roboto', sans-serif; /* Fonte sans-serif moderna */
+  color: #fff;
+   text-align: center;
+}
+
+.room-card.available .room-title{
+    font-size: 3em;
+}
+
+.room-name {
+  font-size: 1em; /* Ajuste conforme necessário */
+  line-height: 1.2; /* Ajuste o espaçamento entre as linhas */
+  margin: 5px 0;
+  white-space: nowrap; /* Evita quebra de linha */
+  overflow: hidden; /* Oculta conteúdo excedente */
+  text-overflow: ellipsis; /* Adiciona reticências se o texto exceder */
+  color: #fff;
+}
+
+.room-date {
+  font-size: 1em;
+  font-weight: lighter;
+  color: #fff;
+  text-align: center;
+}
+
+
+.logo-image{
+    width: 395px;
+    height: 110px;
+
+    object-fit: contain;
+
+
+}
+
 .navigation-menu {
     list-style-type: none;
     margin: 0;

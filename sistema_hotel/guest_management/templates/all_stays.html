@@ -1,20 +1,20 @@
-<!-- Corrigido all_stays.html -->
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Todas as Hospedagens</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/all_stays.css' %}">
+{% extends 'base.html' %}
 
-</head>
-<body>
+{% load static %}
+
+{% block title %}
+Hotel Imperial - Dashboard
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
 
 <div class="container">
-    <header class="header">
-        {% load static %}
-        <img src="{% static 'css/img_logo.png' %}" alt="Logo" class="logo-image">
-    </header>
 
     <main class="main-content">
         <h1>Todas as Hospedagens</h1>
@@ -47,5 +47,6 @@
     </main>
 
 </div>
-</body>
-</html>
+
+{% endblock %}
+
