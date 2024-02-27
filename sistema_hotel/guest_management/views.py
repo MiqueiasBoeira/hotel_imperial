@@ -3,7 +3,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Booking, Room, CheckOut, FinancialTransaction
-from .forms import BookingCheckInForm, BookingCheckOutForm
+from .forms import BookingCheckInForm, BookingCheckOutForm, FinancialTransactionForm
 from django.utils import timezone
 from django.db.models import Sum, Prefetch
 from django.contrib.auth.decorators import login_required, permission_required
@@ -80,7 +80,6 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'rooms':rooms,'form':form})
 
 @login_required(login_url='/login/')
-@permission_required('guest_management.can_view',raise_exception=True)
 def financial_report(request):
     transactions = FinancialTransaction.objects.all()
     total_amount = 0
@@ -129,3 +128,14 @@ def stay_details(request, booking_id):
         'checkout': checkout
     })
 
+
+@login_required
+def add_financial_transaction(request):
+    if request.method == 'POST':
+        form = FinancialTransactionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('financial_report')
+    else:
+        form = FinancialTransactionForm()
+    return render(request, 'add_financial_transaction.html', {'form':form})

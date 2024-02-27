@@ -1,6 +1,6 @@
 #forms.pys
 
-from .models import Booking, CheckOut
+from .models import Booking, CheckOut, FinancialTransaction
 from django import forms
 
 
@@ -30,8 +30,6 @@ class BookingCheckInForm(forms.ModelForm):
         }
 
 
-
-
 class BookingCheckOutForm(forms.ModelForm):
     class Meta:
         model = CheckOut
@@ -46,4 +44,13 @@ class BookingCheckOutForm(forms.ModelForm):
         }
         labels = {
             # Adicione os rótulos conforme necessário
+        }
+
+
+class FinancialTransactionForm(forms.ModelForm):
+    class Meta:
+        model = FinancialTransaction
+        fields = ['transaction_type', 'description', 'amount', 'date']
+        widgets = {
+            'date': forms.DateInput(attrs={'type':'date'})
         }
