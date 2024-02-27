@@ -64,8 +64,10 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'guest_management.context_processors.recepcionista_context',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'builtins': ['django.templatetags.static'],
         },
     },
 ]
@@ -130,3 +132,11 @@ STATICFILES_DIRS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
+
+# Redirecionamento após login
+LOGIN_REDIRECT_URL = 'dashboard'
+
+LOGIN_URL = '/login/'
+

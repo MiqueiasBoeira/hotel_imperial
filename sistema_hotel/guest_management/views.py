@@ -6,8 +6,10 @@ from .models import Booking, Room, CheckOut, FinancialTransaction
 from .forms import BookingCheckInForm, BookingCheckOutForm
 from django.utils import timezone
 from django.db.models import Sum, Prefetch
+from django.contrib.auth.decorators import login_required, permission_required
 
 
+@login_required
 def create_booking(request, room_number):
     room = get_object_or_404(Room, room_number=room_number)
 
@@ -28,14 +30,14 @@ def create_booking(request, room_number):
 
     return render(request, 'dashboard.html', {'form':form})
 
-
+@login_required
 def room_details(request, room_number):
     room = get_object_or_404(Room, room_number=room_number)
     booking = room.current_booking
     checkout_form = BookingCheckOutForm()  # Crie uma instância do formulário de checkout
     return render(request, 'room_details.html', {'booking': booking, 'form': checkout_form})
 
-
+@login_required
 def checkout(request, room_number):
     room = get_object_or_404(Room, room_number=room_number)
     booking = room.current_booking
@@ -71,12 +73,14 @@ def checkout(request, room_number):
 
     return redirect(request, 'dashboard.html', {'form': form, 'room': room})
 
+@login_required
 def dashboard(request):
     rooms = Room.objects.all()
     form = BookingCheckInForm()
     return render(request, 'dashboard.html', {'rooms':rooms,'form':form})
 
-
+@login_required(login_url='/login/')
+@permission_required('guest_management.can_view',raise_exception=True)
 def financial_report(request):
     transactions = FinancialTransaction.objects.all()
     total_amount = 0
@@ -97,6 +101,7 @@ def financial_report(request):
         'search_performed': search_performed  # Passe esta variável para o template
     })
 
+@login_required
 def all_stays(request):
     # Obtenha todas as informações de Booking e CheckOut
     bookings = Booking.objects.all()
@@ -113,6 +118,7 @@ def all_stays(request):
 
     return render(request, 'all_stays.html', {'stays': stays})
 
+@login_required
 def stay_details(request, booking_id):
     # Obtenha informações detalhadas de Booking e CheckOut
     booking = Booking.objects.get(id=booking_id)
@@ -122,3 +128,4 @@ def stay_details(request, booking_id):
         'booking': booking,
         'checkout': checkout
     })
+
